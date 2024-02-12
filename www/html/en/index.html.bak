@@ -1,0 +1,45 @@
+file<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Language Sensistive content - English version</title>
+    <meta name="author" content="Jeff Silverman" />
+    <meta name="generator" content="BlueGriffon wysiwyg editor" />
+    <style type="text/css">
+html {
+  background-color: white;
+ color:black;
+  height: 100%;
+}
+
+body {
+  background-color: white;
+    background-image: url("Whitehouse_united_states.jpeg");
+  background-repeat: no-repeat;
+    background-size: cover;
+  color: black;
+  height: 100%;
+}
+
+:link {
+  color: #0000ee;
+}
+
+:link:active {
+  color: #ee0000;
+}
+
+:link:visited {
+  color: #551a8b;
+}
+
+</style></head>
+  <body>
+    <h1></h1>
+<p></p>
+  </body>
+</html>
+
+      Language sensitive content - English.
+  
+This is a demonstration of a file with English content.
