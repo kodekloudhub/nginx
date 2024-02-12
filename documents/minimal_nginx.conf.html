@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Minimal nginx.html file</title>
+    <meta name="author" content="Jeff Silverman">
+    <link rel="stylesheet" type="text/css" href="homepage.css">
+
+  </head>
+  <body>
+    <p>This is a minimalist nginx.conf file.&nbsp; It's good enough to get a
+      page up with nothing but static content, and that only in a single
+      directory, but this is plenty for a small website.</p>
+    <pre>#user  nobody;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log;
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    keepalive_timeout  65;
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            root   /var/www/html;
+            index  index.html index.htm;
+        }
+    error_page  404              /404.html;
+    error_page   500 502 503 504  /50x.html;
+
+    }
+}
+</pre>
+    <span style="font-family: monospace; font-size: 8pt;">
+      <script src="../../page_header.js"></script></span>
+  </body>
+</html>
