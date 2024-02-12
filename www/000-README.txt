@@ -5,8 +5,14 @@ This directory contains directories that contain content that the nginx webserve
 The contents of this directory's file tree should be sent to the web server's /var/www directory
 on the web server.
 
-That can be done using git, but it can *also* be done using scp from the development machine to 
-the webserver. The advantage of using git is that the development machine and the web server machine
+That can be done using 
+1) git
+2) scp from the development machine to the webserver
+3) symlinking the file tree that git is managing under www to /var/www
+
+
+
+The advantage of using git is that the development machine and the web server machine
 can be on different branches, and git makes it harder to overwrite changes.
 
 To do that, the directory has to be set up.
@@ -51,5 +57,16 @@ Now, you have only the contents of the specified subdirectory in your working di
    ```
 
 Make sure to replace `<branch-name>` with the appropriate branch name.
+jeffs@fedora:~/kodekloud$ sudo rm /var/www
+jeffs@fedora:~/kodekloud$ sudo ln -s $HOME/kodekloud/www /var/www
+jeffs@fedora:~/kodekloud$ ls /var/www
+000-README.txt  cgi-bin  html  wsgi
+jeffs@fedora:~/kodekloud$ 
+
+
+
+The advantage of using the symlink is that it keeps the file tree together in one tree, and yet the 
+files are where nginx expects them to be without too much additional trial and tribution.
+
 
 
