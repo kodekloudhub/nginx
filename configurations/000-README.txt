@@ -12,7 +12,15 @@ which is both doable and recommended):
 
 mv /etc/nginx /etc/nginx_STASHED
 ln -s /home/jeffs/kodekloud/configurations/module_3_virtual_servers_redirection_best_practice/ /etc/nginx
-ls /etc/nginx/nginx.conf
+ls /etc/nginx/
+
+In my case, the result was:
+root@fedora:~# ls /etc/nginx
+conf.d  my_mime.types  nginx.conf  sites-available  sites-enabled
+root@fedora:~# 
+
+As you go through the course, the target of the symlink you create will change, but /etc/nginx will not.
+
 
 This is my expectation
 
