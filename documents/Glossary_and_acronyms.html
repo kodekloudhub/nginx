@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>Glossary and acronyms</title>
+    <meta name="author" content="Jeff Silverman">
+    <meta name="description" content="A list of acronyms and selected terms">
+    <meta name="generator" content="BlueGriffon wysiwyg editor">
+    <link rel="stylesheet" type="text/css" href="homepage.css">
+  </head>
+  <body> <span style="font-size: 8pt; font-family: monospace; line-height: 1pt;"><br>
+      <script type="text/javascript" src="page_header.js"></script></span> <br>
+    <p><br>
+    </p>
+    <h1>Glossary and acronyms</h1>
+    <!--Please keep these entries in alphabetical order-->
+    <dl>
+      <dt>.</dt>
+      <dd>.</dd>
+      <dt>CA</dt>
+      <dd>Certificate Authority</dd>
+      <dt if="def_cert">Cert or <A id="def_Certificate">Certificate</A></dt>
+      <dd>A public key that an HTTPS server gives a client that the client uses
+        to prove that the server has the private key.&nbsp; The server can have
+        the private key if and only if a CA gave the server the cert.</dd>
+      <dt>CSR</dt>
+      <dd>Certificate Signing Request</dd>
+      <dt><a id="def_DNS">DNS</a></dt>
+      <dd>Domain Name Service - a distributed service on the internet that
+        translates between names and addresses as well some other useful key
+        value lookups.</dd>
+      <dt><a id="#def_GUID">GUID</a></dt>
+      <dd>Globally Unique Identifiers (See <a href="https://www.rfc-editor.org/rfc/rfc4122">RFC
+          4122</a>.).&nbsp; These are 128 bit numbers that have a very, very
+        high probability that they will be unique.&nbsp; See <a href="#def_UUID">UUID</a>.&nbsp;
+        GUIDs are used by Microsoft, who just had to be different.&nbsp; Most of
+        the time, it doesn't matter.&nbsp; Most of the time.</dd>
+      <dt id="def_HTTP">HTTP</dt>
+      <dd>HyperText Transport (RFC list...)</dd>
+      <dt id="def_HTTPS">HTTPS</dt>
+      <dd>HyperText Transport with Security (RFC list...)</dd>
+      <dt>.</dt>
+      <dd>.</dd>
+      <dt id="def_registrar">Registrar</dt>
+      <dd>An organization which has been approved to make entries in one or more
+        <a href="#def_DNS">DNS</a> <a href="#def_TLD">TLD</a>s.</dd>
+      <dt id="def_SNI">SNI</dt>
+      <dd>Server Name Indication&nbsp; (<a href="https://www.rfc-editor.org/rfc/rfc6066">RFC
+          6066</a>) See the <a href="https://nginx.org/en/docs/http/configuring_https_servers.html#sni">nginx.org
+          official documentation</a>.</dd>
+      <dt>SSL</dt>
+      <dd>Secure Sockets Layer.&nbsp; SSL is an anachronism, use <a href="#def_TLS">TLS</a>
+        instead.</dd>
+      <dt><a id="def_TLD">TLD</a></dt>
+      <dd>DNS Top Level Domains.&nbsp; The highest level names in the <a href="#def_DNS">DNS</a>
+        name space.&nbsp; Examples include .COM, .ORG, .UK, .NAME and
+        .XXX.&nbsp; <a href="https://data.iana.org/TLD/tlds-alpha-by-domain.txt">IANA
+          has a list of TLDs</a>.</dd>
+      <dt id="def_TLS">TLS</dt>
+      <dd>Transport Layer Security</dd>
+      <dt id="def_UUID"><a id="def_UUID">UUID</a></dt>
+      <dd>Universally Unique Identifiers.&nbsp; These are 128 bit numbers that
+        have a very, very high probability that they will be unique.&nbsp; See <a
+          href="#def_GUID">GUID</a>.&nbsp; See <a href="https://www.rfc-editor.org/rfc/rfc4122">RFC
+          4122</a>.&nbsp; There are standard libraries in most programming
+        langauges for using UUIDs.&nbsp; Use them.</dd>
+      <dt id="def_X.509">X.509</dt>
+      <dd class="important">Look this up.</dd>
+      <dt>.</dt>
+      <dd>.</dd>
+      <dt id="def_Zero-trust">Zero-trust</dt>
+      <dd>A system design philosophy in which a server provider does not trust
+        any inbound connection without some trusted thing that attests to its
+        trustworthiness.</dd>
+    </dl>
+  </body>
+</html>
