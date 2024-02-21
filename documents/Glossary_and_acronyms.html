@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Glossary and acronyms</title>
     <meta name="author" content="Jeff Silverman">
     <meta name="description" content="A list of acronyms and selected terms">
@@ -17,13 +17,15 @@
     <dl>
       <dt>.</dt>
       <dd>.</dd>
-      <dt>CA</dt>
+      <dt id="def_CA">CA</dt>
       <dd>Certificate Authority</dd>
-      <dt if="def_cert">Cert or <A id="def_Certificate">Certificate</A></dt>
+      <dt id="def_cert">Cert or <a id="def_Certificate">Certificate</a></dt>
       <dd>A public key that an HTTPS server gives a client that the client uses
         to prove that the server has the private key.&nbsp; The server can have
         the private key if and only if a CA gave the server the cert.</dd>
-      <dt>CSR</dt>
+      <dt id="def_CSPRN">CSPRN</dt>
+      <dd>Cryptographically Secure Pseudo Random Number​</dd>
+      <dt id="def_CSR">CSR</dt>
       <dd>Certificate Signing Request</dd>
       <dt><a id="def_DNS">DNS</a></dt>
       <dd>Domain Name Service - a distributed service on the internet that
@@ -37,18 +39,31 @@
         the time, it doesn't matter.&nbsp; Most of the time.</dd>
       <dt id="def_HTTP">HTTP</dt>
       <dd>HyperText Transport (RFC list...)</dd>
+      <dt id="def_HTTP/2">HTTP/2</dt>
+      <dd>HTTP/2 is a major revision of the HTTP network protocol used by the
+        World Wide Web.&nbsp; The specification was published May 14<sup>th</sup>
+        2015.&nbsp; HTTP/2 still uses TCP</dd>
+      <dt id="def_HTTP/3">HTTP/3</dt>
+      <dd>HTTP/3 is a major revision of the HTTP network protoco.&nbsp; It's
+        noteworthy in that it uses <a href="#def_HTTP/2">QUIC</a> over UDP.</dd>
       <dt id="def_HTTPS">HTTPS</dt>
       <dd>HyperText Transport with Security (RFC list...)</dd>
-      <dt>.</dt>
-      <dd>.</dd>
+      <dt id="def_QUIC">QUIC</dt>
+      <dd>At one time, this was Quick UDP Internet Connections. That's not in
+        the official standard, <a href="https://www.rfc-editor.org/rfc/rfc9000">RFC
+          9000</a>.</dd>
       <dt id="def_registrar">Registrar</dt>
       <dd>An organization which has been approved to make entries in one or more
         <a href="#def_DNS">DNS</a> <a href="#def_TLD">TLD</a>s.</dd>
+      <dt><a id="def_RSA">RSA</a></dt>
+      <dd>Rivest, Shamir and Adleman algorithm.&nbsp; See The Wikipedia article
+        on <a href="https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29">RSA
+          (cryptosystem)</a>.</dd>
       <dt id="def_SNI">SNI</dt>
       <dd>Server Name Indication&nbsp; (<a href="https://www.rfc-editor.org/rfc/rfc6066">RFC
           6066</a>) See the <a href="https://nginx.org/en/docs/http/configuring_https_servers.html#sni">nginx.org
           official documentation</a>.</dd>
-      <dt>SSL</dt>
+      <dt id="def_SSL">SSL</dt>
       <dd>Secure Sockets Layer.&nbsp; SSL is an anachronism, use <a href="#def_TLS">TLS</a>
         instead.</dd>
       <dt><a id="def_TLD">TLD</a></dt>
