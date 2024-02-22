@@ -19,6 +19,10 @@
       <dd>.</dd>
       <dt id="def_CA">CA</dt>
       <dd>Certificate Authority</dd>
+      <dt>certbot</dt>
+      <dd>A computer program that automates the management of X.509
+        certificates.&nbsp; Official details for nginx are documented at <a href="https://eff-certbot.readthedocs.io/en/stable/using.html#nginx">readthedocs.io</a>
+        and elsewhere such as <a href="https://phoenixnap.com/kb/letsencrypt-nginx">phoenixnap.com</a>.</dd>
       <dt id="def_cert">Cert or <a id="def_Certificate">Certificate</a></dt>
       <dd>A public key that an HTTPS server gives a client that the client uses
         to prove that the server has the private key.&nbsp; The server can have
@@ -31,7 +35,7 @@
       <dd>Domain Name Service - a distributed service on the internet that
         translates between names and addresses as well some other useful key
         value lookups.</dd>
-      <dt><a id="#def_GUID">GUID</a></dt>
+      <dt><a id="def_GUID">GUID</a></dt>
       <dd>Globally Unique Identifiers (See <a href="https://www.rfc-editor.org/rfc/rfc4122">RFC
           4122</a>.).&nbsp; These are 128 bit numbers that have a very, very
         high probability that they will be unique.&nbsp; See <a href="#def_UUID">UUID</a>.&nbsp;
@@ -59,6 +63,10 @@
       <dd>Rivest, Shamir and Adleman algorithm.&nbsp; See The Wikipedia article
         on <a href="https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29">RSA
           (cryptosystem)</a>.</dd>
+      <dt>Self-signed Cert</dt>
+      <dd>An X.509 Certificate which is completely valid except that it has been
+        signed by some computer that is not a <a href="#def_CA">CA</a> known to
+        the browser.</dd>
       <dt id="def_SNI">SNI</dt>
       <dd>Server Name Indication&nbsp; (<a href="https://www.rfc-editor.org/rfc/rfc6066">RFC
           6066</a>) See the <a href="https://nginx.org/en/docs/http/configuring_https_servers.html#sni">nginx.org
@@ -66,6 +74,13 @@
       <dt id="def_SSL">SSL</dt>
       <dd>Secure Sockets Layer.&nbsp; SSL is an anachronism, use <a href="#def_TLS">TLS</a>
         instead.</dd>
+      <dt><a id="def_TCP">TCP</a></dt>
+      <dd>Transmission Control Protocol.&nbsp;&nbsp;&nbsp; Send a stream of
+        bytes from the application on the sender to the application on the
+        receiver.&nbsp; Every byte that goes in&nbsp; is guaranteed to come out
+        the other side in the same order.&nbsp; TCP is more reliable than <a href="#def_UDP">UDP</a>
+        especially in networks where the packet loss rate is relatively high or
+        where congestion in the network is an issue.</dd>
       <dt><a id="def_TLD">TLD</a></dt>
       <dd>DNS Top Level Domains.&nbsp; The highest level names in the <a href="#def_DNS">DNS</a>
         name space.&nbsp; Examples include .COM, .ORG, .UK, .NAME and
@@ -73,6 +88,14 @@
           has a list of TLDs</a>.</dd>
       <dt id="def_TLS">TLS</dt>
       <dd>Transport Layer Security</dd>
+      <dt><a id="def_UDP">UDP</a></dt>
+      <dd>User Datagram Protocol.&nbsp; Send packets direct from the application
+        on the sender to the application on the receiver.&nbsp; Packet delivery
+        is not assured, and the order in which the packets are delivered is not
+        assured (which is acceptable because the application takes care of
+        that).&nbsp; UDP is much faster than <a href="#def_TCP">TCP</a>,
+        especially in networks that are intrinsically reliable or if the
+        computers have plenty of RAM to perform buffering.</dd>
       <dt id="def_UUID"><a id="def_UUID">UUID</a></dt>
       <dd>Universally Unique Identifiers.&nbsp; These are 128 bit numbers that
         have a very, very high probability that they will be unique.&nbsp; See <a
@@ -88,5 +111,10 @@
         any inbound connection without some trusted thing that attests to its
         trustworthiness.</dd>
     </dl>
+    <hr>
+    <p> <br>
+    </p>
+    <span style="font-size: 8pt; font-family: monospace; line-height: 1pt;"><br>
+      <script type="text/javascript" src="page_header.js"></script></span>
   </body>
 </html>
