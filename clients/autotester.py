@@ -47,8 +47,8 @@ def run_test(protocol: str, url: str, request: str, headers: dict, strings: List
     # For now, to force the use IPv4, bind the local address to an IPv4 address, like so:
     # httpx.Client(transport=httpx.HTTPTransport(local_address="0.0.0.0"))
     # This is from https://www.python-httpx.org/advanced/#usage_1
-    protocol = "6"
-
+    protocol = "4"
+    this_url_pass = True
     try:
         r: httpx.Response = httpx.get(url)
     except httpx.ConnectError:
@@ -56,12 +56,17 @@ def run_test(protocol: str, url: str, request: str, headers: dict, strings: List
     except Exception as e:
         report_error(f"{RED}httpx raised an {e.__class__.__name__} on URL {url}.")
     else:
-        print(f"{MAGENTA}The type of r is {type(r)}. {RESET}")
+        if r.status_code != 200:        # Status really is an integer
+            print(f"{RED}URL {url} returned status code {r.status_code}{RESET}", file=sys.stderr)
+        # print(f"{MAGENTA}The type of r is {type(r)}. {RESET}")
         for s in strings:
             if s not in r.text:
-                report_error(f"{YELLOW} the string '{s}' does not appear in the output of {url}{RESET}\n" +
-                             GRAY + r.text + RESET)
+                report_error(f"{YELLOW} the string {s}' does not appear in the output of {url}{RESET}\n")
                 all_pass = False
+                this_url_pass = False
+        if this_url_pass:
+            print(f"{GREEN} {url} is all good{RESET}.")
+
 
 
 def report_error(message: str) -> str:
@@ -72,7 +77,7 @@ def report_error(message: str) -> str:
                     that the message is warning, an error, a success, or informational
     :return: str    So that in the future, if this method wants to modify the message, it can
     """
-    print(message)
+    print(message, file=sys.stderr)
     return message
 
 
@@ -84,7 +89,7 @@ if "__main__" == __name__:
     with open(file=tsv_filename, mode="r") as tsv_file:
         tsv_reader = csv.reader(tsv_file, delimiter='\t')
         for row in tsv_reader:
-            print(f"{MAGENTA}The type of row is {type(row)}, its {len(row)} and is {row}.{RESET}")
+            # print(f"{MAGENTA}The type of row is {type(row)}, its {len(row)} and is {row}.{RESET}")
             # run_test might clear all_pass
             run_test(protocol=row[0], url=row[1], request="GET", headers={}, strings=row[2:])
     print(f"{GREEN} all tests PASS {RESET}" if all_pass else f"{RED} at least one test FAILED{RESET}")
