@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Bug report #4: autotester.py does not handle 301 redirects at all.</title>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+  </head>
+  <body>
+    <h1>Bug report #4: autester.py does not handle 301 redirects at all</h1>
+    <h2>Priority: Low</h2>
+    <h2>Author: Jeff Silverman</h2>
+    <h2>Date: 2024-03-03</h2>
+    <p><br>
+    </p>
+    <h2>Symptoms:</h2>
+    <p>When the autotester.py program hits a URL that returns a 301 redirect,
+      the autotester.py ignores the redirect and looks for the string in the
+      redirect message.&nbsp; Of course, it's not there, so it reports it as a
+      failure.&nbsp; I think this is a false negative.</p>
+    <p><br>
+    </p>
+    <h2>Analysis</h2>
+    <p>I am using the httpx package which supports redirection.&nbsp; Just
+      figure out how it works and implement it.</p>
+    <p>In the interim, there is a work around.&nbsp; Have the
+      test_production.tsv detect the string "301".&nbsp; That will allow it to
+      pass the test.&nbsp; Then on the next line have the target of the
+      redirect.</p>
+    <h2>Conclusion</h2>
+    <p>This is an easy fix, I think</p>
+    <p><br>
+    </p>
+    <h2>Disposition:</h2>
+  </body>
+</html>
