@@ -21,9 +21,13 @@ To do that, the directory has to be set up.
    If you haven't already, clone the repository to your local machine.
    git clone REMOTE_REPOSITORY_URL
 
+(as of 4-Mar-2024, 2024:03:04,  REMOTE_REPOSITORY_URL is
+git@github.com:kodekloudhub/nginx.git
+
+
 2. **Enable Sparse Checkout**:
    cd REPOSITORY_DIRECTORY
-   (in this case, that would be kodekloud)
+   (in this case, that would be kodekloud or ~/work/kodekloud`)
 
    and enable sparse checkout.
    git config core.sparseCheckout true
@@ -69,4 +73,4 @@ The advantage of using the symlink is that it keeps the file tree together in on
 files are where nginx expects them to be without too much additional trial and tribution.
 
 
-
+Y
