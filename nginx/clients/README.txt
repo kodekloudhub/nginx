@@ -1,3 +1,6 @@
+DO NOT USE THIS DIRECTORY FOR ANYTHING.  IT SHOULD NOT BE HERE!
+
+
 This directory is to be used for storing client side software,
 which essentially is server testing software.
 As of 2023-01-16 23:55,  this is the state of the git repository
