@@ -1,1 +1,13 @@
 Wed Mar  6 11:39:52 PM PST 2024
+/home/jeffs/work/kodekloud/nginx/configurations/module_4_APIs
+total 120
+-rw-r--r--. 1 jeffs jeffs  1843 Mar  5 15:39 api-nginx.conf
+-rw-r--r--. 1 jeffs jeffs  4807 Mar  5 15:39 default
+lrwxrwxrwx. 1 jeffs jeffs    47 Feb 19 20:11 mime.types -> /home/jeffs/kodekloud/configurations/mime.types
+lrwxrwxrwx. 1 jeffs jeffs    55 Feb 19 20:11 my_mime.types -> /home/jeffs/work/kodekloud/configurations/my_mime.types
+-rw-r--r--. 1 jeffs jeffs  2368 Mar  5 20:57 nginx.conf
+-rw-r--r--. 1 jeffs jeffs    94 Mar  6 23:40 process_test_20240306-2339.txt
+-rw-r--r--. 1 jeffs jeffs    32 Mar  5 15:39 process_test.txt
+-rw-r--r--. 1 jeffs jeffs 86024 Mar  5 15:39 typescript
+-rw-r--r--. 1 jeffs jeffs   987 Mar  5 15:39 uwsgi_params
+-rw-r--r--. 1 jeffs jeffs   189 Mar  5 15:39 wsgi_virtual_server.conf
