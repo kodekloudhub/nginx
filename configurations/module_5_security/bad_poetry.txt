@@ -1,4 +1,0 @@
-# Put this file in /etc/nginx/, have owned by nginx or whatever user is running
-# the nginx server, and protected 400
-jeff:$1$08HvdsdE$WEtLsN3DaNvpBMWorsBS51: Pass word is "jeff"
-

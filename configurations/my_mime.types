@@ -1,9 +1,0 @@
-# my_mime.types 
-# 
-# Definitions for file name extensions I use:
-types {
-   text/plain py;	# python source code
-   text/plain tsv;	# tab separated variables
-   text/plain csv;	# comma separated variables
-   text/plain conf;	# nginx configuration files
-}                                                                                                                                          
