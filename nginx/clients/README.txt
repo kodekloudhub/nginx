@@ -1,4 +1,4 @@
-DO NOT USE THIS DIRECTORY FOR ANYTHING.  IT SHOULD NOT BE HERE!
+DO NOT USE THIS DIRECTORY (/nginx/nginx/clients) FOR ANYTHING.  IT SHOULD NOT BE HERE!
 
 
 This directory is to be used for storing client side software,
