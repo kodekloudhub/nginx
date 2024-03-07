@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 #
-# This is a simple WSGI application.  It should be started under a web server such as gunicorn.
+# This is a simple WSGI application.  It should be started under a web server such as gunicorn, preferably before nginx starts.
 #
 import sys
 from wsgiref.simple_server import make_server
@@ -75,6 +75,7 @@ def application(environ, start_response):
             result = f'Error: Please enter valid numbers. <b>post_data</b> is {post_data} '
         else:
             result = num1 + num2
+    # This is really a shortcut.  Should be if environ['REQUEST_METHOD'] != 'GET'` then return 405,  Method Not Allowed
     else:
         result = html
 
