@@ -1,0 +1,6 @@
+minimal_nginx.conf.html has the minimal nginx.conf file within it.  Excerpt
+that text and put it into nginx.conf.
+
+Then move minimal_nginx.conf to the documentation folder.
+
+
