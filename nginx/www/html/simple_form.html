@@ -1,0 +1,16 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<Title>A simple demonstration HTML form</title>
+</head>
+<body>
+<h2>HTML Forms</h2>
+<form action="/flask/name" method="POST">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="Jane"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Roe"><br><br>   <input type="submit" value="Submit">
+</form>
+<p>If you click the "Submit" button, the form-data will be sent to  "/flask/name".</p>
+</body>
+</html>
