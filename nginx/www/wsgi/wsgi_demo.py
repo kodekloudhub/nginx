@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 #
+# Last modified 2024-03-07 4:13
 # This is a simple WSGI application.  It should be started under a web server such as gunicorn, preferably before nginx starts.
 #
 import sys
@@ -12,6 +13,7 @@ ERROR_OUT = sys.stdout
 PORT = 8000  # Listen on this port.  Traditionally, somewhere between 8000 and 8999.
 # It is a bad idea to use a port number less than 1024, because that requires root priveleges
 # and if you need root, then you are doing something wrong.
+`
 MAX_START_FAILS = 5     # If the server fails to start, then try again, up to MAX_START_FAILS times.
 # The hypothesis is that a previous run has left the TCP in a finalizing state.
 # ( FIN-WAIT-1, FIN-WAIT-2, CLOSE-WAIT, CLOSING, LAST-ACK, or TIME-WAIT ).  Since the socket isn't closed
