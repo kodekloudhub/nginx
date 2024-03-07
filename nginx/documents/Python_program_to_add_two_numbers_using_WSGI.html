@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Python program that interfaces to a web server using WSGI</title>
+    <meta name="author" content="Jeff Silverman">
+    <meta name="description" content="Written by ChatGPT">
+    <meta name="generator" content="BlueGriffon wysiwyg editor">
+    <link rel="stylesheet" type="text/css" href="homepage.css">
+  </head>
+  <body>
+    <p>Below is a simple Python program using WSGI (Web Server Gateway
+      Interface) to accept two integers as arguments from a web server request
+      and return a well-formatted HTML file containing the sum of the two
+      integers:<br>
+      <br>
+      ```python<br>
+    </p>
+    <pre class="code">def application(environ, start_response):
+        &nbsp;&nbsp;&nbsp; # Set content type to HTML
+        &nbsp;&nbsp;&nbsp; headers = [('Content-type', 'text/html')]
+        
+        &nbsp;&nbsp;&nbsp; # Get query parameters from the URL
+        &nbsp;&nbsp;&nbsp; query_string = environ.get('QUERY_STRING', '')
+        
+        &nbsp;&nbsp;&nbsp; # Parse query parameters
+        &nbsp;&nbsp;&nbsp; params = parse_query_string(query_string)
+        
+        &nbsp;&nbsp;&nbsp; # Extract integers from query parameters
+        &nbsp;&nbsp;&nbsp; num1 = int(params.get('num1', 0))
+        &nbsp;&nbsp;&nbsp; num2 = int(params.get('num2', 0))
+        
+        &nbsp;&nbsp;&nbsp; # Calculate sum
+        &nbsp;&nbsp;&nbsp; total = num1 + num2
+        
+        &nbsp;&nbsp;&nbsp; # HTML response body
+        &nbsp;&nbsp;&nbsp; response_body = f"""
+        &nbsp;&nbsp;&nbsp; &lt;html&gt;
+        &nbsp;&nbsp;&nbsp; &lt;head&gt;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;title&gt;Sum of Two
+        Integers&lt;/title&gt;
+        &nbsp;&nbsp;&nbsp; &lt;/head&gt;
+        &nbsp;&nbsp;&nbsp; &lt;body&gt;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h1&gt;Sum of {num1} and
+        {num2} is {total}&lt;/h1&gt;
+        &nbsp;&nbsp;&nbsp; &lt;/body&gt;
+        &nbsp;&nbsp;&nbsp; &lt;/html&gt;
+        &nbsp;&nbsp;&nbsp; """
+        
+        &nbsp;&nbsp;&nbsp; # Convert response body to bytes
+        &nbsp;&nbsp;&nbsp; response_body = response_body.encode('utf-8')
+        
+        &nbsp;&nbsp;&nbsp; # Send response with HTTP status code 200 OK
+        &nbsp;&nbsp;&nbsp; start_response('200 OK', headers)
+        
+        &nbsp;&nbsp;&nbsp; return [response_body]
+        
+        
+        def parse_query_string(query_string):
+        &nbsp;&nbsp;&nbsp; # Parse query string and return dictionary of
+        key-value pairs
+        &nbsp;&nbsp;&nbsp; params = {}
+        &nbsp;&nbsp;&nbsp; if query_string:
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pairs =
+        query_string.split('&amp;')
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for pair in pairs:
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key,
+        value = pair.split('=')
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        params[key] = value
+        &nbsp;&nbsp;&nbsp; return params
+        
+        
+        if __name__ == '__main__':
+        &nbsp;&nbsp;&nbsp; from wsgiref.simple_server import make_server
+        
+        &nbsp;&nbsp;&nbsp; # Create a WSGI server
+        &nbsp;&nbsp;&nbsp; with make_server('', 8000, application) as httpd:
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print("Serving on port
+        8000...")
+        
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Serve requests indefinitely
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; httpd.serve_forever()
+        </pre>
+    <br>
+    ```<br>
+    <br>
+    Save this code in a file (e.g., `wsgi_app.py`) and run it. Then, you can
+    access the application by visiting
+    `http://localhost:8000/?num1=5&amp;num2=10` in your web browser, where
+    `num1` and `num2` are the two integers you want to sum. This will display
+    the sum in a well-formatted HTML page.
+    <p></p>
+  </body>
+</html>

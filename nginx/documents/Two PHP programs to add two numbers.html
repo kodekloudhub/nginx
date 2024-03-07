@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>PHP program to add two numbers</title>
+    <meta name="author" content="Jeff Silverman">
+    <meta name="generator" content="BlueGriffon wysiwyg editor">
+  </head>
+  <body>
+    <p>Sure, you can create a PHP script that interfaces with Nginx using
+      FastCGI to handle requests. Below is an example of such a script:<br>
+      <br>
+      ```php<br>
+      &lt;?php<br>
+      // Get the input parameters from Nginx<br>
+      $input = file_get_contents('php://input');<br>
+      $params = json_decode($input, true);<br>
+      <br>
+      // Check if both integers are provided<br>
+      if (!isset($params['num1']) || !isset($params['num2'])) {<br>
+      &nbsp;&nbsp;&nbsp; die('Error: Please provide two integers as input.');<br>
+      }<br>
+      <br>
+      // Extract the integers<br>
+      $num1 = intval($params['num1']);<br>
+      $num2 = intval($params['num2']);<br>
+      <br>
+      // Calculate the sum<br>
+      $sum = $num1 + $num2;<br>
+      <br>
+      // Return a well-formatted HTML response<br>
+      echo "&lt;!DOCTYPE html&gt;<br>
+      &lt;html lang='en'&gt;<br>
+      &lt;head&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;meta charset='UTF-8'&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;meta name='viewport' content='width=device-width,
+      initial-scale=1.0'&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;title&gt;Sum of Two Integers&lt;/title&gt;<br>
+      &lt;/head&gt;<br>
+      &lt;body&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;h1&gt;Sum of Two Integers&lt;/h1&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;p&gt;Input: $num1 + $num2&lt;/p&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;p&gt;Sum: $sum&lt;/p&gt;<br>
+      &lt;/body&gt;<br>
+      &lt;/html&gt;";<br>
+      ?&gt;<br>
+      ```<br>
+      <br>
+      Make sure to configure Nginx to interface with PHP using FastCGI. Here's a
+      sample Nginx configuration (assuming PHP-FPM is installed and running):<br>
+      <br>
+      ```<br>
+      server {<br>
+      &nbsp;&nbsp;&nbsp; listen 80;<br>
+      &nbsp;&nbsp;&nbsp; server_name your_domain.com;<br>
+      <br>
+      &nbsp;&nbsp;&nbsp; root /path/to/your/document/root;<br>
+      <br>
+      &nbsp;&nbsp;&nbsp; location /sum {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_pass
+      unix:/var/run/php/php7.4-fpm.sock; // Adjust the path based on your PHP
+      version<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_param SCRIPT_FILENAME
+      $document_root/sum.php;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include fastcgi_params;<br>
+      &nbsp;&nbsp;&nbsp; }<br>
+      }<br>
+      ```<br>
+      <br>
+      With this setup, Nginx will pass requests to `/sum` to the PHP script, and
+      the script will return the sum of the two integers in a well-formatted
+      HTML response.</p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <p>Here is one way to call the program.&nbsp; <kbd>http://yourdomain.com/sum.php?num1=5&amp;num2=10</kbd>
+    </p>
+    <p> </p>
+    <hr style="width: 100%; height: 20px; color: #3366ff; border-style: solid;">
+    <p>Below is a simple PHP program that interfaces with nginx, accepts two
+      integers as arguments, and returns a well-formatted HTML file that
+      contains the sum of the two integers. It also includes an HTML form that
+      invokes the program.<br>
+      <br>
+      ```php<br>
+      &lt;?php<br>
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {<br>
+      &nbsp;&nbsp;&nbsp; // Retrieve input values from the form<br>
+      &nbsp;&nbsp;&nbsp; $num1 = $_POST['num1'];<br>
+      &nbsp;&nbsp;&nbsp; $num2 = $_POST['num2'];<br>
+      &nbsp;&nbsp;&nbsp; <br>
+      &nbsp;&nbsp;&nbsp; // Calculate the sum<br>
+      &nbsp;&nbsp;&nbsp; $sum = $num1 + $num2;<br>
+      &nbsp;&nbsp;&nbsp; <br>
+      &nbsp;&nbsp;&nbsp; // Generate HTML output<br>
+      &nbsp;&nbsp;&nbsp; $html_output = "&lt;!DOCTYPE html&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;html&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;head&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;title&gt;Sum Calculator&lt;/title&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;/head&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;body&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;h2&gt;Sum of Two Integers&lt;/h2&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;p&gt;Number 1: $num1&lt;/p&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;p&gt;Number 2: $num2&lt;/p&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;p&gt;Sum: $sum&lt;/p&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;a href=\"\"&gt;Back to Form&lt;/a&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;/body&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;/html&gt;";<br>
+      &nbsp;&nbsp;&nbsp; <br>
+      &nbsp;&nbsp;&nbsp; // Output the HTML<br>
+      &nbsp;&nbsp;&nbsp; echo $html_output;<br>
+      } else {<br>
+      &nbsp;&nbsp;&nbsp; // Display the HTML form<br>
+      &nbsp;&nbsp;&nbsp; echo "&lt;!DOCTYPE html&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;html&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;head&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;title&gt;Sum Calculator&lt;/title&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/head&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;body&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;h2&gt;Enter Two Integers&lt;/h2&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;form method=\"post\" action=\"\"&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;label for=\"num1\"&gt;Number 1:&lt;/label&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;input type=\"number\" name=\"num1\" id=\"num1\"
+      required&gt;&lt;br&gt;&lt;br&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;label for=\"num2\"&gt;Number 2:&lt;/label&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;input type=\"number\" name=\"num2\" id=\"num2\"
+      required&gt;&lt;br&gt;&lt;br&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;input type=\"submit\" value=\"Calculate Sum\"&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;/form&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/body&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/html&gt;";<br>
+      }<br>
+      ?&gt;<br>
+      ```<br>
+      <br>
+      Make sure your nginx server is configured to handle PHP files. The
+      configuration typically involves installing PHP-FPM and configuring nginx
+      to pass PHP requests to PHP-FPM. Additionally, the PHP script should be
+      placed in a directory accessible by the nginx server and have the
+      appropriate permissions.<br>
+    </p>
+  </body>
+</html>

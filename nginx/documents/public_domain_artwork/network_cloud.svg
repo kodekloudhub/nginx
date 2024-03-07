@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64.56266mm"
+   height="31.873888mm"
+   viewBox="0 0 64.56266 31.873888"
+   version="1.1"
+   id="svg1473"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="network_cloud.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1475"
+     pagecolor="#ffffff"
+     bordercolor="#cccccc"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="2"
+     inkscape:cx="169.75"
+     inkscape:cy="134"
+     inkscape:window-width="1900"
+     inkscape:window-height="1046"
+     inkscape:window-x="10"
+     inkscape:window-y="10"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1470" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-3.2743045,-112.87444)">
+    <g
+       id="g3265">
+      <path
+         style="fill:#e6e6f0;fill-opacity:0.995709;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 19.342323,117.83198 c -12.7043659,-0.71212 -4.325385,7.42386 -8.310122,5.14956 -6.5808477,-3.75604 -5.7306257,2.23523 -4.5154699,4.84111 1.8288616,3.92196 -7.6382392,5.03114 -0.2477643,8.05319 0.050009,3.40552 5.4009702,6.22787 11.1379042,5.37413 2.109145,7.33431 11.0775,-3.05916 16.34219,-2.87988 4.561989,5.13647 17.071924,9.46416 16.894629,2.97538 -1.125701,-4.5732 2.484902,-5.91551 10.966886,-5.66282 8.057672,-4.10474 9.784305,-11.74297 -5.162407,-13.4873 0.383303,-2.22472 6.261556,-11.50257 -14.800466,-5.53096 -1.355605,-1.82929 -5.980751,-6.66783 -14.98725,-0.55259 -2.862246,-3.7018 -5.501584,-5.15 -7.31813,1.72018 z"
+         id="path1510"
+         sodipodi:nodetypes="cssccccccccc" />
+      <text
+         xml:space="preserve"
+         style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="10.793074"
+         y="131.69373"
+         id="text8646"><tspan
+           sodipodi:role="line"
+           id="tspan8644"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           x="10.793074"
+           y="131.69373">Network Cloud</tspan></text>
+    </g>
+  </g>
+</svg>
