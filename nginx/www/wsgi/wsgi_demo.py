@@ -6,14 +6,15 @@
 import sys
 from wsgiref.simple_server import make_server
 import time
+import os       # for the call to os.getpid()
 
 # For reasons I do not understand, output to stderr does not appear.  If I figure out the reason and can fix it, then
 # change ERROR_OUT to sys.stderr
 ERROR_OUT = sys.stdout
 PORT = 8000  # Listen on this port.  Traditionally, somewhere between 8000 and 8999.
-# It is a bad idea to use a port number less than 1024, because that requires root priveleges
+# It is a bad idea to use a port number less than 1024, because that requires root privileges
 # and if you need root, then you are doing something wrong.
-`
+
 MAX_START_FAILS = 5     # If the server fails to start, then try again, up to MAX_START_FAILS times.
 # The hypothesis is that a previous run has left the TCP in a finalizing state.
 # ( FIN-WAIT-1, FIN-WAIT-2, CLOSE-WAIT, CLOSING, LAST-ACK, or TIME-WAIT ).  Since the socket isn't closed
@@ -93,7 +94,7 @@ def parse_post_data(post_data):
     return data
 
 
-# Creating a server that listens on TCP port PORT.
+# Creating a server that listens on TCP port.
 # When a web client makes a query, the server will call
 # application which then does whatever is needed.
 fail_ctr = 0
@@ -108,8 +109,7 @@ while fail_ctr < MAX_START_FAILS:
         exit(2)
     except OSError as ox:
         fail_ctr += 1
-        print(f"Tried to the start server and that failed {fail_ctr} times.  Probably waiting for TCP socket to close."
-              "Waiting 30 seconds.", file=ERROR_OUT)
+        print(f"Tried to the start server on port {PORT} and that failed {fail_ctr} times. {MAX_START_FAILS -fail_ctr} attempts left.  PID={os.getpid()}  Probably waiting for TCP socket to close Waiting 30 seconds.", file=ERROR_OUT)
         time.sleep(30)
 print("Too many failures.  Exiting abnormally", file=ERROR_OUT)
 exit(1)
