@@ -15,7 +15,7 @@ items = {}
 
 
 @app.route('/')
-def index():
+def make_form():
     log_something("Created the HTML file")
     return html, 200  # Variable html is defined before call app.run, below.
     # I did that to make this method easy to understand
@@ -31,6 +31,11 @@ def get_items():
 # API endpoint for creating an item
 @app.route('/api/items', methods=['POST'])
 def create_item():
+    """
+    There is a flaw here: POST is supposed to create a new item.  In this implementation, if items[key] already exists,
+    then create_item should return an error.  It doesn't, it overwrites items[key]  Fix this.
+    :return:
+    """
     # request.form returns parsed form data from a PUT or POST operation
     data = request.form
     # I think something is wrong with the way I am calling nginx using httpx.  Using the form works.
@@ -45,13 +50,13 @@ def create_item():
             return "Can't find the arguments.  " \
                 "This might be a problem with the client, might be a problem with the server", 500
         else:
-            print(f"Got the arguments from the URL after all")
+            print(f"Got the arguments from the URL after all (was expecting from a form).")
     # data is a werkzeug.datastructures.structures.ImmutableMultiDict which is an immutable MultiDict.
     print(f"the keys in data are {data.keys()},\n data is {data}\n", file=sys.stderr)
     sys.stderr.flush()
 
     key = data.get(key='key', default=None)
-    value = data.get(key='key', default=None)
+    value = data.get(key='value', default=None)
     if key is None or value is None:
         return f"Having troubles decoding the query.  key is {key} and value is {value}", 500
 
@@ -65,30 +70,58 @@ def create_item():
 
 
 # API endpoint for updating an item
-@app.route('/api/items/<int:index>', methods=['PUT'])
-def update_item(index):
-    data = request.json
-    log_something(f"in update_item.  Data is {data} items is now {items}.")
-    items[index] = data
-    return jsonify(data)
+@app.route('/api/items/', methods=['PUT'])
+def update_item():
+    """Update a value in the items dictionary"""
+    data = request.form
+    # I ought to put in some code here to attempt to pick up a value for key from the URL - that's a user error.
+    # This should be a function instead of copy and pasting in the source code
+    if data.get(key='key', default=None) is None:
+        log_something("The key was not in the form or something else went wrong.  Trying to get from the URL")
+        data = request.args  # PUT should not put arguments in the URL
+        if data.get(key='key', default=None) is None:
+            log_something("The key was not in the URL (and should not have been) or something else went wrong. Giving up")
+            return "Can't find the arguments.  " \
+                   "This might be a problem with the client, might be a problem with the server", 500
+        else:
+            print(f"Got the arguments from the URL after all (was expecting from a form).")
+    # This can be moved into the conditional - DRY
+    key = data.get(key='key')
+    value = data.get(key='value')
+    log_something(f"In update_item: The key is {key} and the value is {value}")
+    # Should check that key is not already in items.  If it is not, then technically, it should indicate that and let
+    # higher level software deal with it.
+    items[key] = value
+    r = make_response((f"Successfully removed {key}", 204, {"Content-Type": "text/text"}))
+    return r
 
 
 # API endpoint for deleting an item
-@app.route('/api/items/<int:index>', methods=['DELETE'])
-def delete_item(index):
-    log_something(f"In delete_item.  Index is {index}")
-    del items[index]
-    return jsonify({'message': 'Item deleted'}), 200
+@app.route('/api/items/', methods=['DELETE'])
+def delete_item():
+    """This should handle the case where items[key] is already gone"""
+    data = request.args
+    key = data.get(key='key', default=None)
+    log_something(f"In delete_item.  key is {key}")
+    if key is None:
+        r = make_response(("A value for key was not found.  Something is wrong", 400, {"Content-Type": "text/text"}))
+    else:
+        if key in items:
+            del items[key]
+            r = make_response((f"Successfully removed {key}", 204, {"Content-Type": "text/text"}))
+        else:
+            r = make_response((f"{key} was found in the dictionary", 410, {"Content-Type": "text/text"}))
+    return r
 
 
 def log_something(msg: str):
     # I could use the standard python logger, but that's too complicated for what I want to do.  I just want a simple
     # file with messages as appropriate and with a timestamp.
     global logfile
-    now = dt.now()
-    now_str = now.isoformat()
-
-    print(f"{now_str} {msg} ", file=logfile)
+    now_ = dt.now()
+    now_str_ = now_.isoformat()
+    print(f"{now_str_} {msg} ", file=sys.stderr)
+    print(f"{now_str_} {msg} ", file=logfile)
     logfile.flush()
 
 
@@ -134,8 +167,8 @@ if __name__ == '__main__':
     now = dt.now()
     now_str = now.isoformat()
     # filename = LOGFILENAME + now_str + ".txt"
-    filename = LOGFILENAME + ".txt"
-    logfile = open(filename, "a+")
-    print(f"To stderr: logfilename  is {filename} ", file=sys.stderr)
+    logfilename = LOGFILENAME + ".txt"
+    logfile = open(logfilename, "a+")
+    print(f"Server starting: logfilename  is {logfilename} ", file=sys.stderr)
     log_something("****** Server starting ************")
     app.run(debug=True)
