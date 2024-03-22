@@ -5,7 +5,9 @@ import sys
 from datetime import datetime as dt
 
 from flask import Flask, render_template, request, jsonify, make_response
-from flask_debugtoolbar import DebugToolbarExtension
+
+# from flask_debugtoolbar import DebugToolbarExtension      I really want to do this, but I do not want to take
+# troubleshooting time for the debugging tool bar now
 
 LOGFILENAME = "flask_log_"
 app = Flask(__name__)
@@ -16,6 +18,7 @@ items = {}
 
 @app.route('/')
 def make_form():
+    print("In make_form", file=sys.stderr)
     log_something("Created the HTML file")
     return html, 200  # Variable html is defined before call app.run, below.
     # I did that to make this method easy to understand
@@ -24,6 +27,7 @@ def make_form():
 # API endpoint for listing items
 @app.route('/api/items', methods=['GET'])
 def get_items():
+    print("In get_items", file=sys.stderr)
     r = make_response((items, 200, {"Content-Type": "application/json"}))
     return r
 
@@ -36,6 +40,7 @@ def create_item():
     then create_item should return an error.  It doesn't, it overwrites items[key]  Fix this.
     :return:
     """
+    print("In create_item", file=sys.stderr)
     # request.form returns parsed form data from a PUT or POST operation
     data = request.form
     # I think something is wrong with the way I am calling nginx using httpx.  Using the form works.
@@ -45,10 +50,10 @@ def create_item():
     # httpx -v -m POST -p key key_7000 -p value value_7000 -h Content-Type application/json http://e7240/api/items
     # Cause a failure.
     if data.get(key='key', default=None) is None:
-        data = request.args     # POST should not put arguments in the URL
+        data = request.args  # POST should not put arguments in the URL
         if data.get(key='key', default=None) is None:
             return "Can't find the arguments.  " \
-                "This might be a problem with the client, might be a problem with the server", 500
+                   "This might be a problem with the client, might be a problem with the server", 500
         else:
             print(f"Got the arguments from the URL after all (was expecting from a form).")
     # data is a werkzeug.datastructures.structures.ImmutableMultiDict which is an immutable MultiDict.
@@ -73,6 +78,7 @@ def create_item():
 @app.route('/api/items/', methods=['PUT'])
 def update_item():
     """Update a value in the items dictionary"""
+    print("In update_item", file=sys.stderr)
     data = request.form
     # I ought to put in some code here to attempt to pick up a value for key from the URL - that's a user error.
     # This should be a function instead of copy and pasting in the source code
@@ -80,7 +86,8 @@ def update_item():
         log_something("The key was not in the form or something else went wrong.  Trying to get from the URL")
         data = request.args  # PUT should not put arguments in the URL
         if data.get(key='key', default=None) is None:
-            log_something("The key was not in the URL (and should not have been) or something else went wrong. Giving up")
+            log_something("The key was not in the URL (and should not have been) or something else went wrong." 
+                          "Giving up")
             return "Can't find the arguments.  " \
                    "This might be a problem with the client, might be a problem with the server", 500
         else:
@@ -99,6 +106,7 @@ def update_item():
 # API endpoint for deleting an item
 @app.route('/api/items/', methods=['DELETE'])
 def delete_item():
+    print("In delete_item", file=sys.stderr)
     """This should handle the case where items[key] is already gone"""
     data = request.args
     key = data.get(key='key', default=None)
