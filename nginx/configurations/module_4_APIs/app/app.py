@@ -16,7 +16,7 @@ app = Flask(__name__)
 items = {}
 
 
-@app.route('/')
+@app.route('/api/items/form')   # As of March 22nd, 2:00 AM, this has not been tested
 def make_form():
     print("In make_form", file=sys.stderr)
     log_something("Created the HTML file")
@@ -26,10 +26,21 @@ def make_form():
 
 # API endpoint for listing items
 @app.route('/api/items', methods=['GET'])
-def get_items():
-    print("In get_items", file=sys.stderr)
+def get_all_items():
+    print("In get_all_items", file=sys.stderr)
     r = make_response((items, 200, {"Content-Type": "application/json"}))
     return r
+
+@app.route('/api/items/<key>', methods=['GET'])
+def get_an_item(key):
+    print(f"In get_an_item, key is {key}", file=sys.stderr)
+    try:
+        value =  items[key]
+        print(f"In get_an_item, value is {value}", file=sys.stderr)
+        r = make_response((value, 200, {"Content-Type": "application/json"}))
+    except KeyError:
+        r = make_response((f"{key} was not found", 200, {"Content-Type": "text/text"}))
+
 
 
 # API endpoint for creating an item
@@ -112,13 +123,14 @@ def delete_item():
     key = data.get(key='key', default=None)
     log_something(f"In delete_item.  key is {key}")
     if key is None:
-        r = make_response(("A value for key was not found.  Something is wrong", 400, {"Content-Type": "text/text"}))
+        r = make_response(("key has the value None.  Something is wrong", 400, {"Content-Type": "text/text"}))
     else:
         if key in items:
             del items[key]
             r = make_response((f"Successfully removed {key}", 204, {"Content-Type": "text/text"}))
         else:
-            r = make_response((f"{key} was found in the dictionary", 410, {"Content-Type": "text/text"}))
+            # I decided that attempting to delete a key/value pair
+            r = make_response((f"{key} was not found in the dictionary", 200, {"Content-Type": "text/text"}))
     return r
 
 
