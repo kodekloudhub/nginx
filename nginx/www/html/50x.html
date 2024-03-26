@@ -1,50 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Server side error</title>
-    <meta name="author" content="Jeff Silverman">
-    <meta name="description" content="Display this page on 5xx error">
-    <meta name="keywords" content="5xx Server side error">
-    <meta name="generator" content="BlueGriffon wysiwyg editor">
-    <style type="text/css">
-html {
-  background-color: orange;
-}
-
-body {
-  background-color: orange;
-  color: black;
-}
-
-:link {
-  color: #0000ee;
-}
-
-:link:active {
-  color: lime;
-}
-
-:link:visited {
-  color: #551a8b;
-}
-
-</style></head>
-  <body>
-    <h1>The server messed up, big time!.</h1>
-    <p>The server returned a 5xx status code and this page.</p>
-    <p>The problem might be that the WSGI server is not running<br>
-    </p>
-    <p><br>
-    </p>
-    <br>
-    <p>please page the sysadmin or the webmaster. </p>
-    <p><br>
-    </p>
-    The content of this file is in <span style="font-family: monospace;">/home/jeffs/work/kodekloud/nginx/www/html/50x.html</span>
-    but it should be <b>referenced</b> from <span style="font-family: monospace;">/var/www/html/50x.html</span>.
-    <p><br>
-      <span style="font-family: monospace; font-size: 8pt;">
-        <script src="page_header.js"></script></span> </p>
-  </body>
+<head>
+<title>Error</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>An error occurred.</h1>
+<p>Sorry, the page you are looking for is currently unavailable.<br/>
+Please try again later.</p>
+<p>If you are the system administrator of this resource then you should check
+the error log for details.</p>
+<p><em>Faithfully yours, nginx.</em></p>
+</body>
 </html>
