@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST Test</title>
+</head>
+<body>
+    <h1>REST Test</h1>
+    <!-- /add is a location within the virtual server which makes the connection to the flask middleware -->
+    <form action="/" method="POST">
+        <label for="key">Key:</label>
+        <input type="text" id="key" name="key" required><br>
+        <label for="value">Value:</label>
+        <input type="text" id="value" name="value" required><br>
+        <button type="submit">POST</button>
+    </form>
+    <br>
+    <form action="/" method="PUT">
+        <label for="key_put">Key:</label>
+        <input type="text" id="key_put" name="key" required><br>
+        <label for="value_put">Value:</label>
+        <input type="text" id="value_put" name="value" required><br>
+        <button type="submit">PUT</button>
+    </form>
+    <br>
+    <form action="/" method="DELETE">
+        <label for="key_delete">Key:</label>
+        <input type="text" id="key_delete" name="key" required><br>
+        <button type="submit">DELETE</button>
+    </form>
+    <br>
+</body>
+</html>

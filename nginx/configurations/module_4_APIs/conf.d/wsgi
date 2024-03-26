@@ -1,0 +1,40 @@
+#
+#
+
+server {
+ 
+    listen 80 ;
+    listen [::]:80 ;
+    # Testing host aliases.  This will be important when we study SSL/TLS
+    # server_name fedora fedora-A fedora-B fedora-C fedora-1 fedora-2 fedora-3;
+    server_name _;	# wildcard server_name.  Good for testing, don't do this in production
+
+    location /wsgi {
+          # For more documentation, see https://freenginx.org/en/docs/http/ngx_http_uwsgi_module.html (new, open source)
+          # https://nginx.org/en/docs/http/ngx_http_uwsgi_module.html (old, commercialized)
+        include /etc/nginx/uwsgi_params;
+        uwsgi_pass 127.0.0.1:8000;		# This uses TCP sockets
+#. uwsgi protocol magic variables https://uwsgi-docs.readthedocs.io/en/latest/Vars.html
+#.  https://uwsgi-docs.readthedocs.io/en/latest/PSGIquickstart.html Quickstart for perl/PSGI applications
+# Since I am not writing for perl, psgi is commented out.
+#            uwsgi_param LLTYPE psgi;
+#            uwsgi_param SCRIPT_FILENAME	/etc/nginx/sites/uwsgi_params.conf;	# absolute path
+#            uwsgi_param SCRIPT_NAME    	uwsgi_params.conf;# path relative to nginx.conf
+
+          }
+
+# These will be broken out into their own .conf files in the future
+
+    location /fastcgi {
+       return 500  "fastcgi is not implemented yet";
+    }
+
+    location /cgi {
+       return 500 "cgo-bin is not implemented yet";
+    }
+
+    error_page  404              /404.html;
+    error_page   500 502 503 504  /50x.html;
+
+
+}

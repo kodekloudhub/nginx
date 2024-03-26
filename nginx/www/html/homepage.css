@@ -1,0 +1,324 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <link rel="alternate stylesheet" type="text/css" href="resource://gre-resources/plaintext.css"
+      title="Wrap Long Lines">
+  </head>
+  <body>
+    <pre>A:link {
+  color: red;
+}
+
+A:visited {
+  color: maroon;
+}
+
+A:active {
+  color: fuchsia;
+}
+
+H1.myclass {
+  border-width: medium;
+  border-style: solid;
+  text-align: center;
+}
+
+H1, .h1 {
+  font-size: 36pt;
+  font-weight: bold;
+  background-color: #ffdcdc;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  margin-left: 18pt;
+}
+
+H2, .h2 {
+  font-size: 30pt;
+  font-weight: bold;
+  background-color: #ffffcc;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  margin-left: 36pt;
+}
+
+H3, .h3 {
+  font-size: 24pt;
+  font-weight: bold;
+  background-color: #ccffcc;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  margin-left: 54pt;
+}
+
+H4, .h4 {
+  font-size: 20pt;
+  font-weight: bold;
+  background-color: #ccffff;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  margin-left: 72pt;
+}
+
+H5, .h5 {
+  font-size: 16pt;
+  font-weight: bold;
+  background-color: #ccccff;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  margin-left: 72pt;
+}
+
+H6, .h6 {
+  font-size: 14pt;
+  font-weight: bold;
+  background-color: #cccccc;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  margin-left: 90pt;
+}
+
+P {
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.sat {
+  background-color: #c0ffc0;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.sun {
+  background-color: #c0c0ff;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.wkd {
+  background-color: #e0e0e0;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.hol {
+  background-color: #ffffc0;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.toc {
+  background-color: #ffc0c0;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+code, kbd, var {
+  white-space: pre;
+  font-size: 10pt;
+}
+
+kbd, .kbd {
+  text-decoration: underline;
+  font-family: monospace;
+  background-color: #eeeeff;
+}
+
+.code {
+  font: 12px/12px monospace;
+  background-image: repeating-linear-gradient(0deg,
+      darkgray,
+      darkgray 12px,
+      lightgray 12px,
+      lightgray 24px);
+}      
+
+ACRONYM, .acronym {
+  text-decoration: underline;
+  font-family: monospace;
+  background-color: #eeeeff;
+}
+
+SAMP, .samp {
+  font-family: monospace;
+  background-color: Beige;
+}
+
+.var {
+  font-style: italic;
+  font-family: monospace;
+}
+
+pre {
+  background-color: #fefefe;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.appointments {
+  color: red;
+  background-color: #f0f0f0;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.diary {
+  color: green;
+  background-color: violet;
+  font-family: Trajan, Helvetica, sans-serif;
+}
+
+.financial {
+  color: white;
+  background-color: #00cc00;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.important {
+  background-color: lime;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.tbd {
+  color: white;
+  background-color: red;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+.inferred {
+  color: blue;
+  background-color: yellow;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+OL {
+  list-style-type: decimal;
+}
+
+OL OL {
+  list-style-type: upper-alpha;
+}
+
+OL OL OL {
+  list-style-type: decimal;
+}
+
+OL OL OL OL {
+  list-style-type: lower-alpha;
+}
+
+OL OL OL OL OL {
+  list-style-type: decimal;
+}
+
+.hotthought {
+  border-width: medium;
+  border-style: solid;
+  color: red;
+}
+
+.thought {
+  color: red;
+}
+
+blockquote {
+  border-left-color: blue;
+  border-left-style: groove;
+  padding: 20px;
+}
+
+pre, tt, code {
+  font-family: monaco, "dejavu sans mono", "luxi mono", monospace;
+  font-size: 10pt;
+}
+
+pre.programlisting {
+  border-width: 2px 4px 4px 1px;
+  border-style: solid solid groove dashed;
+  border-color: #666666;
+  background-color: #fbfbff;
+  padding: 5px;
+}
+
+#vmx_VMs {
+  float: left;
+}
+
+#sterilite_25_qt_container {
+  float: right;
+}
+
+#xzqweqwe {
+  font-family: Courier, FreeMono, "LM Mono 9";
+}
+
+#adfadf {
+  text-indent: 1cm;
+}
+
+#adsfasdf {
+  text-indent: 0cm;
+}
+
+#FICO_score_2019-04-10 {
+  float: left;
+  visibility: visible;
+}
+
+#quote_from_offer_letter {
+  font-family: FreeSerif;
+}
+
+#US_Dollar_within_the_USA {
+  background-color: red;
+  color: white;
+}
+
+#BG_1571940130938_42690 {
+  font-family: Droid, Serif;
+  -webkit-font-feature-settings: "swsh";
+  font-feature-settings: "swsh";
+}
+
+</pre>
+  </body>
+</html>

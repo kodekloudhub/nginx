@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>A python program that interfaces to a web server using flask</title>
+    <meta name="author" content="Jeff Silverman">
+    <meta name="description" content="Written by ChatGPT">
+    <meta name="generator" content="BlueGriffon wysiwyg editor">
+  </head>
+  <body>
+    <p>Below is a simple Python program that uses Flask to create a web server.
+      This server accepts two integers as arguments in the URL, calculates their
+      sum, and returns a well-formatted HTML file displaying the result.<br>
+      <br>
+      ```python<br>
+      from flask import Flask, request, render_template_string<br>
+      <br>
+      app = Flask(__name__)<br>
+      <br>
+      @app.route('/add')<br>
+      def add():<br>
+      &nbsp;&nbsp;&nbsp; # Get the values of 'a' and 'b' from the query
+      parameters<br>
+      &nbsp;&nbsp;&nbsp; a = request.args.get('a', type=int)<br>
+      &nbsp;&nbsp;&nbsp; b = request.args.get('b', type=int)<br>
+      <br>
+      &nbsp;&nbsp;&nbsp; # Calculate the sum<br>
+      &nbsp;&nbsp;&nbsp; if a is not None and b is not None:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; result = a + b<br>
+      &nbsp;&nbsp;&nbsp; else:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; result = None<br>
+      <br>
+      &nbsp;&nbsp;&nbsp; # Render HTML template with the result<br>
+      &nbsp;&nbsp;&nbsp; html_template = """<br>
+      &nbsp;&nbsp;&nbsp; &lt;!DOCTYPE html&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;html lang="en"&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;head&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;meta charset="UTF-8"&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;meta name="viewport"
+      content="width=device-width, initial-scale=1.0"&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;title&gt;Sum
+      Calculator&lt;/title&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;/head&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;body&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h1&gt;Sum
+      Calculator&lt;/h1&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;form action="/add"
+      method="get"&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;label for="a"&gt;Enter first number:&lt;/label&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;input type="number" id="a" name="a"&gt;&lt;br&gt;&lt;br&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;label for="b"&gt;Enter second number:&lt;/label&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;input type="number" id="b" name="b"&gt;&lt;br&gt;&lt;br&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &lt;input type="submit" value="Calculate"&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/form&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {% if result is not none %}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h2&gt;Result: {{ result
+      }}&lt;/h2&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {% endif %}<br>
+      &nbsp;&nbsp;&nbsp; &lt;/body&gt;<br>
+      &nbsp;&nbsp;&nbsp; &lt;/html&gt;<br>
+      &nbsp;&nbsp;&nbsp; """<br>
+      <br>
+      &nbsp;&nbsp;&nbsp; return render_template_string(html_template,
+      result=result)<br>
+      <br>
+      if __name__ == '__main__':<br>
+      &nbsp;&nbsp;&nbsp; app.run(debug=True)<br>
+      ```<br>
+      <br>
+      Save this code in a file named `app.py`. Make sure you have Flask
+      installed (`pip install flask`). Then, you can run this script, and it
+      will start a web server on your local machine.<br>
+      <br>
+      To access the sum calculator, go to
+      `http://127.0.0.1:5000/add?a=&lt;first_number&gt;&amp;b=&lt;second_number&gt;`
+      in your web browser, replacing `&lt;first_number&gt;` and
+      `&lt;second_number&gt;` with the integers you want to add. For example,
+      `http://127.0.0.1:5000/add?a=3&amp;b=5` will return the sum of 3 and 5.</p>
+  </body>
+</html>

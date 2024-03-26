@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bug report 1: bad rewrite rule </title>
+    <meta name="author" content="Jeff Silverman" />
+    <meta name="generator" content="BlueGriffon wysiwyg editor" />
+    <style type="text/css">
+html {
+  background-color: white;
+}
+
+body {
+  background-color: white;
+  color: black;
+}
+
+:link {
+  color: #0000ee;
+}
+
+:link:active {
+  color: #ee0000;
+}
+
+:link:visited {
+  color: #551a8b;
+}
+
+</style></head>
+  <body>
+    <h1>Bug report #1: Bad 301 relocation rule in <span style="font-family: monospace;">sites-available/default</span>
+      .</h1>
+    <h2>Priority: <span style="background-color:yellowgreen">low</span>.</h2>
+    <h2>Author: Jeff Silverman</h2>
+    <h2>Date: 2024-02-12</h2>
+    <p>The URL http://fedora/en responds with a 301 redirect to itself.  This
+      will cause an infinite loop.  The chrome browser is able to cope with the
+      problem.  So is chromium.  So is firefox.  So will httpx if conscientious
+      about the trailing //</p>
+    <p><br />
+    </p>
+    <h2>Symptoms:</h2>
+    <p><br />
+    </p>
+    <pre><font color="#26A269"><b>jeffs@jeff-latitudee7240</b></font>:<font color="#12488B"><b>~</b></font>$ httpx -v http://fedora/en
+* Connecting to <font color="#26A269">'fedora'</font>
+* Connected to <font color="#26A269">'2602:4b:ac70:a601:b4b5:4535:3f9e:3ce7'</font> on port <font
+color="#2AA1B3"><b>80</b></font>
+<font color="#33DA7A">GET</font> <font color="#33C7DE"><u style="text-decoration-style:single">/en</u></font> <font
+color="#2A7BDE">HTTP</font>/<font color="#2A7BDE">1.1</font>
+<font color="#33C7DE">Host</font>: fedora
+<font color="#33C7DE">Accept</font>: */*
+<font color="#33C7DE">Accept-Encoding</font>: gzip, deflate
+<font color="#33C7DE">Connection</font>: keep-alive
+<font color="#33C7DE">User-Agent</font>: python-httpx/0.26.0
+
+<font color="#2A7BDE">HTTP</font>/<font color="#2A7BDE">1.1</font> <font color="#2A7BDE">301</font> <font
+color="#33C7DE">Moved Permanently</font>
+<font color="#33C7DE">Server</font>: nginx/1.24.0
+<font color="#33C7DE">Date</font>: Tue, 13 Feb 2024 07:49:33 GMT
+<font color="#33C7DE">Content-Type</font>: text/html
+<font color="#33C7DE">Content-Length</font>: 169
+<font color="#33C7DE">Location</font>: http://fedora/en/
+<font color="#33C7DE">Connection</font>: keep-alive
+
+&lt;<font color="#2A7BDE">html</font>&gt;
+&lt;<font color="#2A7BDE">head</font>&gt;&lt;<font color="#2A7BDE">title</font>&gt;301 Moved Permanently&lt;/<font
+color="#2A7BDE">title</font>&gt;&lt;/<font color="#2A7BDE">head</font>&gt;
+&lt;<font color="#2A7BDE">body</font>&gt;
+&lt;<font color="#2A7BDE">center</font>&gt;&lt;<font color="#2A7BDE">h1</font>&gt;301 Moved Permanently&lt;/<font
+color="#2A7BDE">h1</font>&gt;&lt;/<font color="#2A7BDE">center</font>&gt;
+&lt;<font color="#2A7BDE">hr</font>&gt;&lt;<font color="#2A7BDE">center</font>&gt;nginx/1.24.0&lt;/<font
+color="#2A7BDE">center</font>&gt;
+&lt;/<font color="#2A7BDE">body</font>&gt;
+&lt;/<font color="#2A7BDE">html</font>&gt;
+
+<font color="#26A269"><b>jeffs@jeff-latitudee7240</b></font>:<font color="#12488B"><b>~</b></font>$ 
+</pre>
+    <p><br />
+    </p>
+    <p><br />
+    </p>
+    <h2>Analysis</h2>
+    <p>The difference is that the redirect adds a trailing slash. <a href="http://fedora/en">http://fedora/en</a>
+      becomes <a href="http://fedora/en/">http://fedora/en/</a> .  However, the
+      redirect is accomplished in </p>
+    <pre><font color="#A347BA">sites-available/default</font><font color="#2AA1B3">:</font><font
+color="#26A269">75</font><font color="#2AA1B3">:</font>    return <font color="#C01C28"><b>301</b></font> https://$host$request_uri  ; # managed by Certbot</pre>
+    <p>which redirects to HTTPS, not HTTP.  But that's not what I see in the
+      redirection.</p>
+    <p><br />
+    </p>
+    <h2>Conclusion</h2>
+    <p>I do not understand why the redirection to HTTPS in default line 75
+      causes a redirection to HTTP.  I do not understand where that trailing /
+      comes from.  So there is something else going on.</p>
+    <h2>Disposition:</h2>
+    <p>For now, keep open and when understanding comes, revisit this problem.</p>
+    <p><br />
+    </p>
+    <p><br />
+    </p>
+  </body>
+</html>

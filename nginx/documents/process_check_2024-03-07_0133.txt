@@ -1,0 +1,24 @@
+Thu Mar  7 01:33:37 AM PST 2024
+/home/jeffs/work/kodekloud/nginx/documents
+total 480
+-rw-r--r-- 1 jeffs jeffs    204 Feb 11 16:34 000-README.txt
+-rw-rw-r-- 1 jeffs jeffs 156155 Feb 23 01:49 3rd_party_table.txt
+-rw-rw-r-- 1 jeffs jeffs   4240 Feb 16 03:52 A python program that interfaces to a web server using flask.html
+drwxrwxr-x 2 jeffs jeffs   4096 Mar  7 01:30 [0m[01;34mbugs[0m
+-rw-rw-r-- 1 jeffs jeffs   7054 Feb 28 00:40 Glossary_and_acronyms.html
+-rw-rw-r-- 1 jeffs jeffs   7054 Feb 28 00:40 Glossary_and_acronyms.html.bak
+-rw-rw-r-- 1 jeffs jeffs   5607 Feb 17 00:53 homepage.css
+-rw-rw-r-- 1 jeffs jeffs   9991 Feb 21 22:51 nginx_and_openssl_password.html
+-rw-rw-r-- 1 jeffs jeffs   9804 Feb 21 22:49 nginx_and_openssl_password.html.bak
+-rw-rw-r-- 1 jeffs jeffs    484 Feb 18 02:01 OWASP_Top_10_short_list.txt
+-rw-rw-r-- 1 jeffs jeffs   3078 Feb 18 01:53 OWASP_Top_10.txt
+-rw-rw-r-- 1 jeffs jeffs    182 Feb 17 00:58 page_header.js
+-rw-rw-r-- 1 jeffs jeffs   3386 Feb 16 03:50 Perl program to add two numbers using CGI.html
+-rw-rw-r-- 1 jeffs jeffs     75 Mar  7 01:33 process_check_2024-03-07_0133.txt
+-rw-rw-r-- 1 jeffs jeffs     53 Mar  6 02:36 process_check.txt
+drwxrwxr-x 2 jeffs jeffs   4096 Feb 12 01:51 [01;34mpublic_domain_artwork[0m
+-rw-rw-r-- 1 jeffs jeffs   4083 Feb 26 01:54 Python_program_to_add_two_numbers_using_WSGI.html
+-rw-rw-r-- 1 jeffs jeffs   4298 Feb 26 01:54 Python_program_to_add_two_numbers_using_WSGI.html.bak
+-rw-rw-r-- 1 jeffs jeffs  50929 Feb 23 02:02 Table_of_3rd_party_nginx_modules.html
+-rw-rw-r-- 1 jeffs jeffs 156723 Feb 23 02:02 Table_of_3rd_party_nginx_modules.html.bak
+-rw-rw-r-- 1 jeffs jeffs   8608 Feb 16 04:23 Two PHP programs to add two numbers.html
