@@ -3,11 +3,11 @@
 #
 import sys
 from datetime import datetime as dt
-
 from flask import Flask, render_template, request, jsonify, make_response
+import pprint       # python pretty printer
 
 # from flask_debugtoolbar import DebugToolbarExtension      I really want to do this, but I do not want to take
-# troubleshooting time for the debugging tool bar now
+# troubleshooting time for the debugging toolbar now
 
 LOGFILENAME = "flask_log_"
 app = Flask(__name__)
@@ -28,19 +28,44 @@ def make_form():
 @app.route('/api/items', methods=['GET'])
 def get_all_items():
     print("In get_all_items", file=sys.stderr)
-    r = make_response((items, 200, {"Content-Type": "application/json"}))
+    accept_mimetype = request.accept_mimetypes     # This is the MIME type that the client wants from the server
+    if not isinstance(accept_mimetype, str):
+        print(f"The type of accept_mimetype is {type(accept_mimetype)} and its value is "
+              f"{pprint.pformat(accept_mimetype, indent=2)}.", file=sys.stderr)
+    else:
+        accept_mimetype = accept_mimetype.lower()
+    # If the client did not specify what MIME type it wants or if it did specify what it wants, and it will accept JSON
+    # then return JSON.
+    # This could be made more complicated.  Right now, I am returning either JSON or text
+    return_json_flag = accept_mimetype is None or "application/json" in accept_mimetype
+    print(f"The accept mimetype is {accept_mimetype} and the return_json_flag is {return_json_flag}.", file=sys.stderr)
+    if return_json_flag:
+        r = make_response((jsonify(items), 200, {"Content-Type": "application/json"}))
+    else:
+        # Using the pretty printer creates something that kinda sorts looks like JSON but really isn't
+        r = make_response((pprint.pformat(items, indent=2, )+"\r\n", 200, {"Content-Type": "text/text"}))
     return r
+
 
 @app.route('/api/items/<key>', methods=['GET'])
 def get_an_item(key):
     print(f"In get_an_item, key is {key}", file=sys.stderr)
+    accept_mimetype = request.accept_mimetypes.lower()     # This is the MIME type that the client wants from the server
+    # If the client did not specify what MIME type it wants or if it did specify what it wants, and it will accept JSON
+    # then return JSON.
+    # This could be made more complicated.  Right now, I am returning either JSON or text
+    return_json_flag = accept_mimetype is None or "application/json" in accept_mimetype
+    print(f"The accept mimetype is {accept_mimetype} and the return_json_flag is {return_json_flag}.", file=sys.stderr)
     try:
-        value =  items[key]
+        value = items[key]
         print(f"In get_an_item, value is {value}", file=sys.stderr)
-        r = make_response((value, 200, {"Content-Type": "application/json"}))
+        if return_json_flag:
+            r = make_response((jsonify(value), 200, {"Content-Type": "application/json"}))
+        else:
+            r = make_response((value, 200, {"Content-Type": "text/text"}))
     except KeyError:
-        r = make_response((f"{key} was not found", 200, {"Content-Type": "text/text"}))
-
+        r = make_response((f"{key} was not found", 204, {"Content-Type": "text/text"}))
+    return r
 
 
 # API endpoint for creating an item
@@ -51,22 +76,30 @@ def create_item():
     then create_item should return an error.  It doesn't, it overwrites items[key]  Fix this.
     :return:
     """
-    print("In create_item", file=sys.stderr)
+    print("In create_item: ", file=sys.stderr, end="")
     # request.form returns parsed form data from a PUT or POST operation
     data = request.form
+    content_type: str = request.content_type   # this is the MIME type of the request
+    if content_type is not None:
+        content_type = content_type.lower()
+    print(f"content_type of the request is {content_type}.", file=sys.stderr)
     # I think something is wrong with the way I am calling nginx using httpx.  Using the form works.
     # Both
     # httpx -v -m POST -d key key_7000 -d value value_7000 -h Content-Type application/json http://e7240/api/items
     # and
     # httpx -v -m POST -p key key_7000 -p value value_7000 -h Content-Type application/json http://e7240/api/items
     # Cause a failure.
-    if data.get(key='key', default=None) is None:
-        data = request.args  # POST should not put arguments in the URL
+    if "application/json" == content_type:
+        data = response.get_json
+        print(f"The content type is application/json and the data is {data}", file=sys.stderr)
+    else:
         if data.get(key='key', default=None) is None:
-            return "Can't find the arguments.  " \
-                   "This might be a problem with the client, might be a problem with the server", 500
-        else:
-            print(f"Got the arguments from the URL after all (was expecting from a form).")
+            data = request.args  # POST should not put arguments in the URL
+            if data.get(key='key', default=None) is None:
+                return "Can't find the arguments.  " \
+                       "This might be a problem with the client, might be a problem with the server", 500
+            else:
+                print(f"Got the arguments from the URL after all (was expecting from a form).")
     # data is a werkzeug.datastructures.structures.ImmutableMultiDict which is an immutable MultiDict.
     print(f"the keys in data are {data.keys()},\n data is {data}\n", file=sys.stderr)
     sys.stderr.flush()
@@ -74,14 +107,17 @@ def create_item():
     key = data.get(key='key', default=None)
     value = data.get(key='value', default=None)
     if key is None or value is None:
-        return f"Having troubles decoding the query.  key is {key} and value is {value}", 500
-
-    print(f"Value for key is {key} and value is: {value}")
-    items[key] = value
-    log_something(f"in create_item:  data is {data}  data.keys() is {data.keys()}, items is now {items}.")
-    # status must be 201 (Created) and not 200 (Okay)
-    # See https://tedboy.github.io/flask/interface_api.application_object.html?highlight=make_response#flask.Flask.make_response    # noqa
-    r = make_response((items, 201, {"Content-Type": "application/json"}))
+        # I am confident enough in my server code to where if there is a problem getting the data from the request,
+        # then the request is bad.  That might be foolish last words.
+        r = make_response((f"Having troubles decoding the query.  key is {key} and value is {value}", 400,
+                           {"Content-Type": "text/text"}))
+    else:
+        print(f"Value for key is {key} and value is: {value}")
+        items[key] = value
+        log_something(f"in create_item:  data is {data}  data.keys() is {data.keys()}, items is now {items}.")
+        # status must be 201 (Created) and not 200 (Okay)
+        # See https://tedboy.github.io/flask/interface_api.application_object.html?highlight=make_response#flask.Flask.make_response    # noqa
+        r = make_response((f"Added {value} to {key}", 201, {"Content-Type": "text/text"}))
     return r
 
 
@@ -90,7 +126,13 @@ def create_item():
 def update_item():
     """Update a value in the items dictionary"""
     print("In update_item", file=sys.stderr)
-    data = request.form
+    content_type: str = request.content_type  # this is the MIME type of the request
+    if content_type is not None:
+        content_type = content_type.lower()
+    print(f"content_type of the request is {content_type}.", file=sys.stderr)
+    data = response.get_json if "application/json" == content_type else request.form
+    print(f"The content type is {content_type} and the data is {data}", file=sys.stderr)
+
     # I ought to put in some code here to attempt to pick up a value for key from the URL - that's a user error.
     # This should be a function instead of copy and pasting in the source code
     if data.get(key='key', default=None) is None:
