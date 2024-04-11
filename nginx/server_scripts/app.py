@@ -9,14 +9,20 @@ from flask import Flask, render_template, request, jsonify, make_response
 # from flask_debugtoolbar import DebugToolbarExtension      I really want to do this, but I do not want to take
 # troubleshooting time for the debugging tool bar now
 
-LOGFILENAME = "flask_log_"
+LOGFILENAME = "flask_log.txt"
+now = dt.now()
+now_str = now.isoformat()
+# filename = LOGFILENAME + now_str + ".txt"
+logfile = open(LOGFILENAME, "a+")
+print(f"Started at {now_str}", file=logfile)
 app = Flask(__name__)
 
 # Sample data
 items = {}
 
 
-@app.route('/api/items/form')   # As of March 22nd, 2:00 AM, this has not been tested
+@app.route('/api/items/form')  # As of March 22nd, 2:00 AM, this has not been tested
+@app.route('/api/wsgi/items/form')
 def make_form():
     print("In make_form", file=sys.stderr)
     log_something("Created the HTML file")
@@ -26,25 +32,29 @@ def make_form():
 
 # API endpoint for listing items
 @app.route('/api/items', methods=['GET'])
+@app.route('/api/wsgi/items', methods=['GET'])
 def get_all_items():
     print("In get_all_items", file=sys.stderr)
     r = make_response((items, 200, {"Content-Type": "application/json"}))
     return r
 
+
 @app.route('/api/items/<key>', methods=['GET'])
+@app.route('/api/wsgi/items/<key>', methods=['GET'])
 def get_an_item(key):
     print(f"In get_an_item, key is {key}", file=sys.stderr)
     try:
-        value =  items[key]
+        value = items[key]
         print(f"In get_an_item, value is {value}", file=sys.stderr)
         r = make_response((value, 200, {"Content-Type": "application/json"}))
     except KeyError:
         r = make_response((f"{key} was not found", 200, {"Content-Type": "text/text"}))
-
+    return r
 
 
 # API endpoint for creating an item
 @app.route('/api/items', methods=['POST'])
+@app.route('/api/wsgi/items', methods=['POST'])
 def create_item():
     """
     There is a flaw here: POST is supposed to create a new item.  In this implementation, if items[key] already exists,
@@ -87,6 +97,7 @@ def create_item():
 
 # API endpoint for updating an item
 @app.route('/api/items/', methods=['PUT'])
+@app.route('/api/wsgi/items/', methods=['PUT'])
 def update_item():
     """Update a value in the items dictionary"""
     print("In update_item", file=sys.stderr)
@@ -97,7 +108,7 @@ def update_item():
         log_something("The key was not in the form or something else went wrong.  Trying to get from the URL")
         data = request.args  # PUT should not put arguments in the URL
         if data.get(key='key', default=None) is None:
-            log_something("The key was not in the URL (and should not have been) or something else went wrong." 
+            log_something("The key was not in the URL (and should not have been) or something else went wrong."
                           "Giving up")
             return "Can't find the arguments.  " \
                    "This might be a problem with the client, might be a problem with the server", 500
@@ -116,6 +127,7 @@ def update_item():
 
 # API endpoint for deleting an item
 @app.route('/api/items/', methods=['DELETE'])
+@app.route('/api/wsgi/items/', methods=['DELETE'])
 def delete_item():
     print("In delete_item", file=sys.stderr)
     """This should handle the case where items[key] is already gone"""
@@ -184,11 +196,7 @@ if __name__ == '__main__':
     </body>    
 
         """
-    now = dt.now()
-    now_str = now.isoformat()
-    # filename = LOGFILENAME + now_str + ".txt"
-    logfilename = LOGFILENAME + ".txt"
-    logfile = open(logfilename, "a+")
+
     print(f"Server starting: logfilename  is {logfilename} ", file=sys.stderr)
     log_something("****** Server starting ************")
     app.run(debug=True)
