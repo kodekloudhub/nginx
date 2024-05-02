@@ -6,4 +6,5 @@ types {
    text/plain tsv;	# tab separated variables
    text/plain csv;	# comma separated variables
    text/plain conf;	# nginx configuration files
+   text/html shtml;	# HTML with a server side include
 }                                                                                                                                          
